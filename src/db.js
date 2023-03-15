@@ -7,6 +7,7 @@ module.exports = {
 	connectToDb: (callback) => {
 		MongoClient.connect(process.env.MONGO_CONNECTION_STRING).then((client) => {
 			dbConnection = client.db(process.env.DATABASE);
+			console.log('db connect');
 			return callback();
 		}).catch(err => {
 			console.error(err);

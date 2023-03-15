@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const { ObjectId } = require('mongodb');
+const { start } = require('repl');
 const { connectToDb, getDb } = require('./db');
 
-// init app & middleware
 const app = express();
 
 app.use(function (req, res, next) {
@@ -16,13 +16,18 @@ app.use(function (req, res, next) {
 
 // db connection
 let db;
+
+const startListen = () => {
+	app.listen(process.env.PORT, () => {
+		console.log('listening on port ' + process.env.PORT);
+	})
+}
+
 connectToDb((err) => {
 	if (err) console.log(err);
 	if (!err) {
-		app.listen(process.env.PORT, () => {
-			console.log('listening on port ' + process.env.PORT);
-		})
 		db = getDb();
+		startListen();
 	}
 });
 
