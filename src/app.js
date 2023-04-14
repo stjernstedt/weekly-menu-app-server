@@ -1,7 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const { ObjectId } = require('mongodb');
-const { start } = require('repl');
 const { connectToDb, getDb } = require('./db');
 
 const app = express();
@@ -68,14 +66,3 @@ app.post('/dishes', (req, res) => {
 			res.status(500).json({ err: 'Could not create document' })
 		})
 })
-
-// app.get('/dishes/:id', (req, res) => {
-// 	db.collection('dishes')
-// 		.findOne({ _id: new ObjectId(req.params.id) })
-// 		.then(doc => {
-// 			res.status(200).json(doc);
-// 		})
-// 		.catch(err => {
-// 			res.status(500).json({ error: 'could not fetch document' });
-// 		})
-// })
