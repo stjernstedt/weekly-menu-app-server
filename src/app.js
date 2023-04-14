@@ -5,6 +5,7 @@ const { start } = require('repl');
 const { connectToDb, getDb } = require('./db');
 
 const app = express();
+app.use(express.json());
 
 app.use(function (req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
