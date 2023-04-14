@@ -56,6 +56,18 @@ app.get('/dishes/:ingredient', (req, res) => {
 		})
 })
 
+app.post('/dishes', (req, res) => {
+	const dish = req.body;
+	db.collection('dishes')
+		.insertOne(dish)
+		.then(result => {
+			res.status(201).json(result)
+		})
+		.catch(err => {
+			res.status(500).json({ err: 'Could not create document' })
+		})
+})
+
 // app.get('/dishes/:id', (req, res) => {
 // 	db.collection('dishes')
 // 		.findOne({ _id: new ObjectId(req.params.id) })
